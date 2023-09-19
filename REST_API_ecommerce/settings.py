@@ -9,15 +9,12 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
-
+import os
 from pathlib import Path
-import environ
 
-env = environ.Env()
-environ.Env.read_env()
 
-# Secret key
-SECRET_KEY = env("SECRET_KEY")
+# Secret keyfrom pathlib import Path
+SECRET_KEY = "django-insecure-2$@7u)()zef-hph4$bqmp!)k4c2sus_6dg)!ox($a21ko*brsl"
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -82,12 +79,12 @@ WSGI_APPLICATION = "REST_API_ecommerce.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "NAME": env("DB_NAME"),
-        "USER": env("DB_USER"),
-        "PASSWORD": env("DB_PASSWORD"),
-        "HOST": env("DB_HOST"),
-        "PORT": env("DB_PORT"),
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": os.getenv("DATABASE_NAME", "ecommerce"),
+        "USER": os.getenv("DATABASE_USER", "ecommerce_admin"),
+        "PASSWORD": os.getenv("DATABASE_PASSWORD", "lamchatka"),
+        "HOST": os.getenv("DATABASE_HOST", "127.0.0.1"),
+        "PORT": os.getenv("DATABASE_PORT", "5432"),
     }
 }
 
@@ -114,19 +111,19 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-LANGUAGE_CODE = "en-us"
-
+LANGUAGE_CODE = "ru"
 TIME_ZONE = "Europe/Moscow"
-
 USE_I18N = True
-
 USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)
+
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
+# STATIC_URL = "static/"
 STATIC_URL = "static/"
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
