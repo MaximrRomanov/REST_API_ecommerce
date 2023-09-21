@@ -2,7 +2,7 @@ from django.db import models
 
 
 class Category(models.Model):
-    category = models.CharField(
+    name = models.CharField(
         max_length=50, verbose_name="Название категории", unique=True
     )
     slug = models.SlugField(max_length=100, verbose_name="Слаг", unique=True)
@@ -17,7 +17,7 @@ class Category(models.Model):
         verbose_name_plural = "Категории"
 
     def __str__(self):
-        return self.category
+        return self.name
 
 
 class Product(models.Model):
@@ -34,7 +34,7 @@ class Product(models.Model):
     category = models.ForeignKey(
         Category, verbose_name="Категория товара", on_delete=models.CASCADE
     )
-    product = models.CharField(
+    name = models.CharField(
         max_length=200, verbose_name="Название продукта", unique=True
     )
     slug = models.SlugField(max_length=200, verbose_name="Слаг", unique=True)
@@ -69,16 +69,6 @@ class Product(models.Model):
     class Meta:
         verbose_name = "Продукт"
         verbose_name_plural = "Продукты"
-        # ordering = (
-        #     "id",
-        #     "category",
-        #     "product",
-        #     "vendor",
-        #     "status",
-        #     "count",
-        #     "created_date",
-        #     "modified_date",
-        # )
 
     def set_available(self):
         """
@@ -97,4 +87,4 @@ class Product(models.Model):
         self.save()
 
     def __str__(self):
-        return self.product
+        return self.name
